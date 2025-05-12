@@ -5,11 +5,18 @@ using MvcNetCoreAWSPostrgresEC2.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//string connectionString =
+//    builder.Configuration.GetConnectionString("Postgres");
+//builder.Services.AddTransient<RepositoryHospital>();
+//builder.Services.AddDbContext<HospitalContext>
+//    (options => options.UseNpgsql(connectionString));
+
+builder.Services.AddTransient
+    <RepositoryHospital>();
 string connectionString =
-    builder.Configuration.GetConnectionString("Postgres");
-builder.Services.AddTransient<RepositoryHospital>();
+    builder.Configuration.GetConnectionString("Mariadb");
 builder.Services.AddDbContext<HospitalContext>
-    (options => options.UseNpgsql(connectionString));
+    (options => options.UseMySQL(connectionString));
 
 builder.Services.AddControllersWithViews();
 
